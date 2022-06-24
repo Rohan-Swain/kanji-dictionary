@@ -13,7 +13,9 @@ class KanjiData extends React.Component {
             url: '',
             data: [],
             isLoading: false,
-            result: false
+            result: false,
+            isAtHome: true,
+            isSuccess: false
         }
         this.fetchData = this.fetchData.bind(this);
         this.handleInput = this.handleInput.bind(this);
@@ -21,10 +23,19 @@ class KanjiData extends React.Component {
     }
 
     fetchData() {
-        this.setState({ isLoading: true, result: true })
+        this.setState({ isAtHome: false, isLoading: true })
         fetch(this.state.url)
-            .then(response => response.json())
-            .then(data => this.setState({ isLoading: false, data: data }))
+            .then(response => {
+                if (response.ok) {
+                    this.setState({
+                        isSuccess: true
+                    })
+                } else {
+                    this.setState({ isSuccess: false })
+                }
+                return response.json();
+            })
+            .then(data => this.setState({ result: true, isLoading: false, data: data }))
             .catch(err => console.log(err))
     }
 
@@ -33,7 +44,7 @@ class KanjiData extends React.Component {
             searchTerm: e.target.value
         })
 
-        setTimeout(() => this.setUrl(this.state.searchTerm), 1000);
+        setTimeout(() => this.setUrl(this.state.searchTerm), 100);
     }
 
     setUrl(value) {
@@ -49,9 +60,10 @@ class KanjiData extends React.Component {
                     <SearchIcon onClick={this.fetchData} />
                     <InputBox onChange={this.handleInput} type='search' placeholder='Search for Kanji...'></InputBox>
                 </SearchBoxWrapper>
-                {!this.state.result && <Home />}
+                {this.state.isAtHome && <Home />}
                 {this.state.isLoading && <Loading type='bars' color='black' height={100} width={50} />}
-                {this.state.result && <DataWrapper data={this.state.data} />}
+                {(this.state.result && this.state.isSuccess) && <DataWrapper isSuccess={this.state.isSuccess} data={this.state.data} />}
+                {(this.state.result && !this.state.isSuccess) && <ErrorWrapper>No Such Kanji...</ErrorWrapper>}
             </DivWrapper>
         );
     }
@@ -88,4 +100,8 @@ const InputBox = styled.input`
     &:focus {
         outline: none;
     }
+`
+
+const ErrorWrapper = styled.h1`
+    margin-top: 100px;
 `

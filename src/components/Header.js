@@ -56,6 +56,11 @@ const MenuWrapper = styled.ul`
         a {
             color: black;
             text-decoration: none;
+            transition: .2s ease all;
+
+            &:hover {
+                font-weight: 600;
+                border-bottom: 4px solid red;
         }
     }
 `
