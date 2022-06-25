@@ -5,16 +5,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            sideMenu: false
-        }
-        this.handleSideMenu = this.handleSideMenu.bind(this);
-    }
-
-    handleSideMenu() {
-        this.setState({
-            sideMenu: !this.state.sideMenu
-        })
     }
 
     render() {
@@ -31,10 +21,7 @@ class Header extends React.Component {
                         <li><a href='#' title='About Me'>About Me</a></li>
                         <li><a href='https://kanjiapi.dev/' target='blank' title='The API'>The API</a></li>
                     </MenuWrapper>
-                    <MenuIconWrapper onClick={this.handleSideMenu} />
-                    {this.state.sideMenu && <SideMenuWrapper>
-
-                    </SideMenuWrapper>}
+                    <MenuIconWrapper />
                 </div>
             </HeaderWrapper>
         )
@@ -44,7 +31,7 @@ class Header extends React.Component {
 export default Header
 
 const HeaderWrapper = styled.div`
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -53,7 +40,6 @@ const HeaderWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
 `
 
 const Title = styled.div`
@@ -139,14 +125,4 @@ const MenuIconWrapper = styled(MenuIcon)`
         margin-right: 30px;
         cursor: pointer;
     }
-`
-
-const SideMenuWrapper = styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    bottom: 0;
-    width: 14em;
-    background-color: black;
 `

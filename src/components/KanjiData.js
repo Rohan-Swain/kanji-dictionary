@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Home from './Home'
 import Loading from 'react-loading'
 import DataWrapper from './DataWrapper';
+import Fade from 'react-reveal/Fade';
 
 class KanjiData extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class KanjiData extends React.Component {
     }
 
     fetchData() {
-        this.setState({ isAtHome: false, isLoading: true })
+        this.setState({ isAtHome: false, isLoading: true, result: false })
         fetch(this.state.url)
             .then(response => {
                 if (response.ok) {
@@ -73,7 +74,7 @@ class KanjiData extends React.Component {
                 {this.state.isAtHome && <Home />}
                 {this.state.isLoading && <Loading type='bars' color='black' height={100} width={50} />}
                 {(this.state.result && this.state.isSuccess) && <DataWrapper data={this.state.data} />}
-                {(this.state.result && !this.state.isSuccess) && <ErrorWrapper>No Such Kanji<span>...</span></ErrorWrapper>}
+                {(this.state.result && !this.state.isSuccess) && <Fade bottom ><ErrorWrapper>No Such Kanji<span>...</span></ErrorWrapper></Fade>}
             </DivWrapper>
         );
     }
@@ -83,10 +84,10 @@ export default KanjiData;
 
 const DivWrapper = styled.div`
     width: 100vw;
+    min-height: 95vh;
     height: fit-content;
     display: flex;
     flex-direction: column;
-    margin-top: 130px;
     align-items: center;
 `
 
@@ -101,6 +102,7 @@ const SearchBoxWrapper = styled.div`
     border: 1px solid black;
     border-radius: 30px;
     padding-left: 20px;
+    margin-top: 130px;
 
     @media(max-width: 700px) {
         width: 80%;

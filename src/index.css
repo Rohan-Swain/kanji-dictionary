@@ -11,6 +11,6 @@
 
 body {
   width: 100vw;
-  height: 100%;
+  height: fit-content;
   overflow-x: hidden;
 }

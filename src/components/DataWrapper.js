@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Tada from 'react-reveal/Tada';
 
 function DataWrapper(props) {
     const info = props.data;
@@ -14,7 +15,9 @@ function DataWrapper(props) {
                         <h3>Unicode: {info.unicode}</h3>
                         <h3>JLPT level: {info.jlpt === null ? 'null' : info.jlpt}</h3>
                     </div>
-                    <div id='char'>{info.kanji}</div>
+                    <Tada>
+                        <div id='char'>{info.kanji}</div>
+                    </Tada>
                 </div>
                 <hr />
                 {(info.meanings && info.meanings.length !== 0) &&

@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import Fade from 'react-reveal/Fade';
 
 function Home() {
     return (
         <HomeWrapper>
-            <h1>Welcome</h1>
+            <Fade>
+                <h1>Welcome</h1>
+            </Fade>
             <p>This is a Simple Kanji Dictionary.<br /> You can Start by Searching for the Kanji Characters.</p>
         </HomeWrapper>
     )
