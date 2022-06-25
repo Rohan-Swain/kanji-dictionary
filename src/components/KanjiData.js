@@ -128,6 +128,10 @@ const ErrorWrapper = styled.h1`
         font-size: 1.2em;
         color: red;
     }
+
+    @media(max-width: 700px) {
+        font-size: 1.5em;
+    }
 `
 
 const SearchIconWrap = styled.div`
