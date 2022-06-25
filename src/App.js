@@ -1,5 +1,5 @@
-import KanjiData from './components/KanjiData';
 import Header from './components/Header';
+import KanjiData from './components/KanjiData';
 
 function App() {
   return (

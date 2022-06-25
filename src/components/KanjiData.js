@@ -15,11 +15,13 @@ class KanjiData extends React.Component {
             isLoading: false,
             result: false,
             isAtHome: true,
-            isSuccess: false
+            isSuccess: false,
+            sideMenu: false
         }
         this.fetchData = this.fetchData.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.setUrl = this.setUrl.bind(this);
+        this.handleSideMenu = this.handleSideMenu.bind(this);
     }
 
     fetchData() {
@@ -53,17 +55,25 @@ class KanjiData extends React.Component {
         })
     }
 
+    handleSideMenu() {
+        this.setState({
+            sideMenu: !this.state.sideMenu
+        })
+    }
+
     render() {
         return (
             <DivWrapper>
                 <SearchBoxWrapper>
-                    <SearchIcon onClick={this.fetchData} />
                     <InputBox onChange={this.handleInput} type='search' placeholder='Search for Kanji...'></InputBox>
+                    <SearchIconWrap title='Search'>
+                        <SearchIcon fontSize='large' style={{ color: "white" }} onClick={this.fetchData} />
+                    </SearchIconWrap>
                 </SearchBoxWrapper>
                 {this.state.isAtHome && <Home />}
                 {this.state.isLoading && <Loading type='bars' color='black' height={100} width={50} />}
-                {(this.state.result && this.state.isSuccess) && <DataWrapper isSuccess={this.state.isSuccess} data={this.state.data} />}
-                {(this.state.result && !this.state.isSuccess) && <ErrorWrapper>No Such Kanji...</ErrorWrapper>}
+                {(this.state.result && this.state.isSuccess) && <DataWrapper data={this.state.data} />}
+                {(this.state.result && !this.state.isSuccess) && <ErrorWrapper>No Such Kanji<span>...</span></ErrorWrapper>}
             </DivWrapper>
         );
     }
@@ -73,7 +83,7 @@ export default KanjiData;
 
 const DivWrapper = styled.div`
     width: 100vw;
-    height: 100vw;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     margin-top: 130px;
@@ -81,6 +91,8 @@ const DivWrapper = styled.div`
 `
 
 const SearchBoxWrapper = styled.div`
+    z-index: 1;
+    background-color: white;
     width: 60%;
     height: fit-content;
     display: flex;
@@ -88,7 +100,11 @@ const SearchBoxWrapper = styled.div`
     align-items: center;
     border: 1px solid black;
     border-radius: 30px;
-    padding: 0px 20px;
+    padding-left: 20px;
+
+    @media(max-width: 700px) {
+        width: 80%;
+    }
 `
 
 const InputBox = styled.input`
@@ -97,6 +113,7 @@ const InputBox = styled.input`
     font-size: 18px;
     padding: 0px 20px;
     border: none;
+    caret-color: red;
     &:focus {
         outline: none;
     }
@@ -104,4 +121,22 @@ const InputBox = styled.input`
 
 const ErrorWrapper = styled.h1`
     margin-top: 100px;
+
+    span {
+        font-size: 1.2em;
+        color: red;
+    }
+`
+
+const SearchIconWrap = styled.div`
+    background-color: red;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5em;
+    border: 6px double white;
+    border-radius: 30px;
+    margin-right: 0.2em;
+    cursor: pointer;
 `

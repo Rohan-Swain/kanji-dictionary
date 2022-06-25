@@ -21,7 +21,7 @@ function DataWrapper(props) {
                     <div id='meanings'>
                         <h2>Meanings:</h2>
                         <ul>
-                            {info.meanings && info.meanings.map(item => <li key={info.meanings.indexOf(item)}>{item},</li>)}
+                            {info.meanings && info.meanings.map(item => <li key={info.meanings.indexOf(item)}>{item}<Red>,</Red></li>)}
                         </ul>
                     </div>
                 }
@@ -29,7 +29,7 @@ function DataWrapper(props) {
                     <div id='kun_readings'>
                         <h2>Kun Readings:</h2>
                         <ul>
-                            {info.kun_readings.map(item => <li key={info.kun_readings.indexOf(item)}>{item},</li>)}
+                            {info.kun_readings.map(item => <li key={info.kun_readings.indexOf(item)}>{item}<Red>,</Red></li>)}
                         </ul>
                     </div>
                 }
@@ -37,7 +37,7 @@ function DataWrapper(props) {
                     <div id='on_readings'>
                         <h2>On Readings:</h2>
                         <ul>
-                            {info.on_readings && info.on_readings.map(item => <li key={info.on_readings.indexOf(item)}>{item},</li>)}
+                            {info.on_readings && info.on_readings.map(item => <li key={info.on_readings.indexOf(item)}>{item}<Red>,</Red></li>)}
                         </ul>
                     </div>
                 }
@@ -49,11 +49,17 @@ function DataWrapper(props) {
 export default DataWrapper
 
 const MainWrapper = styled.div`
+    z-index: 1;
     width: 80%;
     max-width: 50em;
     padding: 20px;
     height: fit-content;
     margin-top: 80px;
+
+    @media(max-width: 700px) {
+        margin-top: 40px;
+        width: 90%;
+    }
 `
 
 const ShowDiv = styled.div`
@@ -66,19 +72,20 @@ const ShowDiv = styled.div`
             display: flex;
             flex-direction: column;
             justify-content: center;
-            line-height: 2;
+            line-height: 2.5;
             width: 50%;
         }
     
         #char {
+            font-family: 'Noto Sans JP', sans-serif;
             height: fit-content;
             width: 50%;
             max-width: 1.8em;
             text-align: center;
             font-size: 10em;
-            border: 3px solid black;
+            border: 8px double white;
             border-radius: 100px 0px;
-            background-image: linear-gradient(45deg, orange, lightblue);
+            background-color: #FF5C5C
         }
     }
     
@@ -103,4 +110,42 @@ const ShowDiv = styled.div`
             }
         }
     }
+
+    @media(max-width: 700px) {
+        #basic_info {
+            margin-top: 20px;
+
+            #info {
+                line-height: 1.6;
+            }
+
+            #char {
+                font-size: 7em;
+                border-radius: 60px 0px;
+            }
+        }
+        
+        #meanings, #kun_readings, #on_readings {
+            flex-direction: column;
+
+            h2 {
+                font-size: 1.2em;
+                border-bottom: 1px solid red;
+            }
+
+            ul {
+                max-width: 100%;
+                overflow: scroll;
+
+                li {
+                    display: block;
+                }
+            }
+        }
+    }
+`
+
+const Red = styled.span`
+    font-size: 1.2em;
+    color: red;
 `

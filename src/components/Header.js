@@ -1,22 +1,44 @@
 import React from 'react'
 import styled from 'styled-components'
+import MenuIcon from '@mui/icons-material/Menu';
 
-function Header() {
-    return (
-        <HeaderWrapper>
-            <Title>
-                <h2>KANJI</h2>
-                <span>STUDY</span>
-            </Title>
-            <div>
-                <MenuWrapper>
-                    <li><a href='#'>Home</a></li>
-                    <li><a href='#'>About Me</a></li>
-                    <li><a href='https://kanjiapi.dev/' target='blank'>The API</a></li>
-                </MenuWrapper>
-            </div>
-        </HeaderWrapper>
-    )
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sideMenu: false
+        }
+        this.handleSideMenu = this.handleSideMenu.bind(this);
+    }
+
+    handleSideMenu() {
+        this.setState({
+            sideMenu: !this.state.sideMenu
+        })
+    }
+
+    render() {
+        return (
+            <HeaderWrapper>
+                <Circle />
+                <Title>
+                    <h2>KANJI</h2>
+                    <span>DICTIONARY</span>
+                </Title>
+                <div>
+                    <MenuWrapper>
+                        <li><a title='Home' onClick={() => window.location.reload(false)}>Home</a></li>
+                        <li><a href='#' title='About Me'>About Me</a></li>
+                        <li><a href='https://kanjiapi.dev/' target='blank' title='The API'>The API</a></li>
+                    </MenuWrapper>
+                    <MenuIconWrapper onClick={this.handleSideMenu} />
+                    {this.state.sideMenu && <SideMenuWrapper>
+
+                    </SideMenuWrapper>}
+                </div>
+            </HeaderWrapper>
+        )
+    }
 }
 
 export default Header
@@ -31,17 +53,38 @@ const HeaderWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
 `
 
 const Title = styled.div`
+    user-select: none;
     margin-left: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    h2 {
+        letter-spacing: 9px;
+         
+    }
+
     span {
+         
         font-size: 12px;
-        letter-spacing: 6px;
+        color: white;
+        letter-spacing: 3px;
+    }
+
+    @media(max-width: 700px) {
+        margin-left: 30px;
+
+        h2 {
+            letter-spacing: 5px;
+        }
+
+        span {
+            letter-spacing: 2px;
+        }
     }
 `
 
@@ -50,6 +93,7 @@ const MenuWrapper = styled.ul`
     display: flex;
     
     li {
+         
         margin-right: 50px;
         font-size: 1.2em;
 
@@ -57,10 +101,52 @@ const MenuWrapper = styled.ul`
             color: black;
             text-decoration: none;
             transition: .2s ease all;
+            cursor: pointer;
 
             &:hover {
                 font-weight: 600;
                 border-bottom: 4px solid red;
         }
     }
+
+    @media(max-width: 700px) {
+        display: none;
+    }
+`
+
+const Circle = styled.div`
+    width: 30em;
+    height: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 20px double white;
+    border-radius: 0em 0em 30em 0em; 
+    background-color: red;
+    z-index: -1;
+
+    @media(max-width: 700px) {
+        width: 15em;
+        height: 15em;
+        border-radius: 0em 0em 15em 0em;
+    }
+`
+
+const MenuIconWrapper = styled(MenuIcon)`
+    display: none !important;
+    @media(max-width: 700px) {
+        display: block !important;
+        margin-right: 30px;
+        cursor: pointer;
+    }
+`
+
+const SideMenuWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    bottom: 0;
+    width: 14em;
+    background-color: black;
 `
