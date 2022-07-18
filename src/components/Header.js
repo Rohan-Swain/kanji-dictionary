@@ -51,13 +51,12 @@ const Title = styled.div`
 
     h2 {
         letter-spacing: 9px;
-         
     }
 
     span {
-         
-        font-size: 12px;
-        color: white;
+        font-size: 0.8em;
+        font-weight: 600;
+        color: black;
         letter-spacing: 3px;
     }
 

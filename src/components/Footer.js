@@ -6,7 +6,7 @@ function Footer() {
     return (
         <FooterWrapper>
             <div id='text'>
-                <h4>Made with &#128150;</h4>
+                <span>Made with &#128150;</span>
             </div>
             <div id='icon'>
                 <a href='https://github.com/Rohan-Swain' title='GitHub' target='blank'><GitHubIcon /></a>
@@ -42,7 +42,7 @@ const FooterWrapper = styled.div`
         }
     }
 
-    h4 {
+    span {
         font-weight: 400;
     }
 `
