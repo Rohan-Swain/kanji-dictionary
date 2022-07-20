@@ -8,8 +8,11 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   width: 100vw;
-  height: fit-content;
   overflow-x: hidden;
 }

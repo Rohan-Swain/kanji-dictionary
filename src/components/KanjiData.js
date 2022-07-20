@@ -84,7 +84,7 @@ export default KanjiData;
 
 const DivWrapper = styled.div`
     width: 100vw;
-    min-height: 95vh;
+    flex-grow: 1;
     height: fit-content;
     display: flex;
     flex-direction: column;

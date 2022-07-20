@@ -22,6 +22,7 @@ const FooterWrapper = styled.div`
     width: 100%;
     text-align: center;
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
 
