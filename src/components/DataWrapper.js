@@ -138,7 +138,7 @@ const ShowDiv = styled.div`
 
             ul {
                 max-width: 100%;
-                overflow: scroll;
+                flex-direction: column;
 
                 li {
                     display: block;
