@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from '@mui/icons-material/Search'
 import Home from './Home'
 import Loading from 'react-loading'
-import DataWrapper from './DataWrapper';
-import Fade from 'react-reveal/Fade';
+import DataWrapper from './DataWrapper'
+import Fade from 'react-reveal/Fade'
 
 class KanjiData extends React.Component {
     constructor(props) {
@@ -16,13 +16,11 @@ class KanjiData extends React.Component {
             isLoading: false,
             result: false,
             isAtHome: true,
-            isSuccess: false,
-            sideMenu: false
+            isSuccess: false
         }
         this.fetchData = this.fetchData.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.setUrl = this.setUrl.bind(this);
-        this.handleSideMenu = this.handleSideMenu.bind(this);
     }
 
     fetchData() {
@@ -53,12 +51,6 @@ class KanjiData extends React.Component {
     setUrl(value) {
         this.setState({
             url: `https://kanjiapi.dev/v1/kanji/${value}`
-        })
-    }
-
-    handleSideMenu() {
-        this.setState({
-            sideMenu: !this.state.sideMenu
         })
     }
 
